@@ -1,0 +1,76 @@
+{
+  "build_flags": [
+    "-w",
+    "-std=c++17",
+    "-fpermissive",
+
+    "-lbcrypt",
+    "-lSDL2",
+    "-lSDL2_ttf",
+    "-ldwmapi",
+    
+    "-Iplatform/cores/ArduinoNative/src",
+    "-Iplatform/cores/BeeArduino/src",
+    "-Iplatform/libraries/TinyFileDialog/src",
+    "-Iplatform/libraries/SystemSilently/src",
+    "-Iplatform/libraries/WinTimeAlarm/src",
+
+    "-Ilib/BeeNext/src",
+    "-Ilib/BeeUI/src",
+    "-Ilib/BeeUI/src/utils/lvgl",
+
+    "-Lplatform/lib",
+
+    "-lBeeArduino",
+    "-lBeeNext",
+    "-llvgl9.3.0",
+    "-lBeeUI",
+
+    "-lole32",
+    "-lcomdlg32",
+    "-lsetupapi",
+
+    "-lrpcrt4",
+    "-lws2_32 -lcrypt32",
+    "-lpaho-mqtt3a-static -lpaho-mqttpp3-static",
+    "-lcurl -lssl -lcrypto -lz -lwinmm",
+
+    "-D BEEARDUINO_USE_LVGL=1",
+    "-D LV_CONF_SKIP",
+    "-D LV_USE_SDL",
+    "-D LV_LVGL_H_INCLUDE_SIMPLE",
+    "-D LV_DRV_NO_CONF",
+    "-D LV_COLOR_DEPTH=16",
+    "-D LV_LOG_PRINTF=1",
+    "-D LV_USE_FLOAT=1",
+    "-D LV_USE_SNAPSHOT=1",
+    "-D LV_USE_LODEPNG=1",
+    "-D LV_USE_VECTOR_GRAPHIC=1",
+    "-D LV_USE_THORVG_INTERNAL=1",
+    "-D TVG_BUILD=1",
+    "-D LV_USE_MATRIX=1",
+    "-D LV_USE_LOTTIE=1",
+    "-D LV_USE_SVG=1",
+    "-D LV_USE_QRCODE=1",
+    "-D LV_USE_BARCODE=1",
+    "-D LV_USE_TINY_TTF=1",
+    "-D LV_TINY_TTF_FILE_SUPPORT=1",
+    "-D LV_MEM_CUSTOM=1",
+    "-D LV_MEM_SIZE=\"(32 * 1024 * 1024)\"",
+    "-D LV_USE_DEMO_RENDER=1",
+    "-D LV_USE_DRAW_SW_COMPLEX_GRADIENTS=1",
+
+    "-D PRASANMIT_20=1",
+    "-D PRASANMIT_25=1",
+    "-D PRASANMIT_30=1",
+    "-D PRASANMIT_35=1",
+    "-D PRASANMIT_40=1",
+    "-D BEBASNEUE_BOLD_NUM_45=1",
+    "-D LV_FONT_MONTSERRAT_8=1",
+    "-D LV_FONT_MONTSERRAT_10=1",
+    "-D LV_FONT_MONTSERRAT_12=1",
+    "-D LV_FONT_MONTSERRAT_14=1",
+    "-D LV_FONT_MONTSERRAT_16=1",
+    "-D LV_FONT_MONTSERRAT_18=1"
+  ]
+}

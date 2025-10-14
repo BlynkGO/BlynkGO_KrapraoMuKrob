@@ -1,0 +1,43 @@
+{
+  "packages": [
+    {
+      "name": "BlynkGO_KrapraoMuKrob",
+      "maintainer": "BlynkGO",
+      "websiteURL": "https://web.facebook.com/blynkgo.os",
+      "email": "blynkgo@gmail.com",
+      "help": {
+        "online": "https://web.facebook.com/blynkgo.os"
+      },
+      "platforms": [
+        {
+          "name": "BlynkGO_KrapraoMuKrob",
+          "architecture": "pc",
+          "version": "0.9.1",
+          "category": "BlynkGO PC",
+          "toolsDependencies": [
+            {
+              "packager": "BlynkGO_KrapraoMuKrob",
+              "name": "BeeArduino_Toolchain",
+              "version": "v1.2"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "BeeArduino_Toolchain",
+          "version": "v1.2",
+          "systems": [
+            {
+              "host": "i686-mingw32",
+              "url": "https://github.com/BlynkGO/BeeArduino/releases/download/v1.2/BeeArduino_Toolchain_v1.2.zip",
+              "archiveFileName": "BeeArduino_Toolchain_v1.2.zip",
+              "checksum": "SHA-256:4a187b27e3e69ac451c1d9c87ec4aa526030cfa3cc782f449498829db90b53a9",
+              "size": 269043583
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

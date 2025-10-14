@@ -1,0 +1,10 @@
+{
+  "name": "BeeNeXT4.3 Capacitive Touch (480x272)",
+  "url": "https://web.facebook.com/blynkgo.os",
+  "vendor": "BlynkGO",
+  "build": {
+    "build_flags": [
+      "-D LCD_WIDTH=480",
+      "-D LCD_HEIGHT=272"    ]
+  }
+}

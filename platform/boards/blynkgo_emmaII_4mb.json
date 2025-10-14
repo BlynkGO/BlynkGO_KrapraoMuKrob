@@ -1,0 +1,11 @@
+{
+  "name": "BlynkGO Emma-II\" Capacitive 4MB [480x320]",
+  "url": "https://web.facebook.com/blynkgo.os",
+  "vendor": "BlynkGO",
+  "build": {
+    "build_flags": [
+      "-D LCD_WIDTH=480",
+      "-D LCD_HEIGHT=320"
+    ]
+  }
+}

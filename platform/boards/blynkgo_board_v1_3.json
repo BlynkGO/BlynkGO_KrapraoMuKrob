@@ -1,0 +1,11 @@
+{
+  "name": "BlynkGO Board v1.3\" Capacitive [480x320]",
+  "url": "https://web.facebook.com/blynkgo.os",
+  "vendor": "BlynkGO",
+  "build": {
+    "build_flags": [
+      "-D LCD_WIDTH=480",
+      "-D LCD_HEIGHT=320"
+    ]
+  }
+}

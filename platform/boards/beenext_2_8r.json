@@ -1,0 +1,11 @@
+{
+  "name": "BeeNeXT2.8 Resistive Touch (320x240)",
+  "url": "https://web.facebook.com/blynkgo.os",
+  "vendor": "BlynkGO",
+  "build": {
+    "build_flags": [
+      "-D LCD_WIDTH=320",
+      "-D LCD_HEIGHT=240"
+    ]
+  }
+}

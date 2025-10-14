@@ -1,0 +1,75 @@
+#ifndef LV_WIFISETTING_H
+#define LV_WIFISETTING_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*********************
+ *      INCLUDES
+ *********************/
+#include "lvgl.h"
+#include "utils/lvgl/src/core/lv_obj.h"
+#include "utils/lvgl/src/core/lv_obj_private.h"   /* ต้องมี ไม่งั้น error */
+
+/*********************
+ *      DEFINES
+ *********************/
+
+
+/**********************
+ *      TYPEDEFS
+ **********************/
+
+typedef struct _lv_wifisetting_t {
+  lv_obj_t obj;
+  lv_obj_t * title;
+    lv_obj_t * lb_title;
+    lv_obj_t * btn_close;
+  lv_obj_t * body;
+    lv_obj_t * rect_ssid;
+      lv_obj_t * sw_ssid;
+      lv_obj_t * 
+} lv_wifisetting_t;
+
+/**********************
+ * GLOBAL PROTOTYPES
+ **********************/
+lv_obj_t* lv_wifisetting_create(lv_obj_t*parent);
+
+/*=====================
+ * Setter functions
+ *====================*/
+// void lv_wifisetting_set_wifi_rssi_cb(lv_obj_t* wifisetting, fn_get_wifi_rssi_t cb);
+
+// void lv_wifisetting_set_wifi_connection_cb(lv_obj_t* wifisetting, fn_get_wifi_connection_t cb);
+
+// void lv_wifisetting_set_color_wifi_connected(lv_obj_t* wifisetting, lv_color_t color_wifi_connected);
+
+// void lv_wifisetting_set_color_wifi_disconnected(lv_obj_t* wifisetting, lv_color_t color_wifi_disconnected);
+
+// void lv_wifisetting_set_color_wifi_bg(lv_obj_t* wifisetting, lv_color_t color_wifi_bg);
+
+/*=====================
+ * Getter functions
+ *====================*/
+// fn_get_wifi_rssi_t lv_wifisetting_get_wifi_rssi_cb(lv_obj_t* wifisetting);
+
+// fn_get_wifi_connection_t lv_wifisetting_get_wifi_connection_cb(lv_obj_t* wifisetting);
+
+// lv_color_t lv_wifisetting_get_color_wifi_connected(lv_obj_t* wifisetting);
+
+// lv_color_t lv_wifisetting_get_color_wifi_disconnected(lv_obj_t* wifisetting);
+
+// lv_color_t lv_wifisetting_get_color_wifi_bg(lv_obj_t* wifisetting);
+
+/**********************
+ *      MACROS
+ **********************/
+
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
+
+#endif /* LV_WIFISETTING_H */

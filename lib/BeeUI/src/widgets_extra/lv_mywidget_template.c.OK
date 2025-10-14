@@ -1,0 +1,172 @@
+/*
+ *********************************************************************************
+ * ลิขลิทธิ์ (Commercial License)
+ * 
+ *   1. โคดไฟล์ lv_mywidget_template.c นี้เป็นไลบรารี่ลิขลิทธิ์ 
+ *   สร้างโดย BlynkGO
+ *   
+ *   2.ไม่อนุญาต ให้แจกจ่าย สำเนา หรือแก้ไข โดยไม่ได้รับอนุญาต 
+ *   
+ *   3.สำหรับผู้ได้รับ ลิขสิทธิ์ สามารถนำไปใช้สร้าง firmware/rom 
+ *   สำหรับ บอร์ด ESP32 ที่ระบุเท่านั้น เพื่อใช้ทางการค้าต่างๆได้
+ *   โดยห้ามแจกจ่าย จำหน่าย ดัดแปลง แก้ไขใดๆ ในตัว source ไลบรารี่ออกไป
+ *
+ *   4.หากมีการนำไปใช้คอมไพล์ถือว่าได้ยอมรับ ตามเงื่อนไขลิขสิทธิ์ดังกล่าว
+ *   เป็นที่เรียบร้อยแล้ว
+ * 
+ * Version 5.0
+ * 
+ *********************************************************************************
+ */
+
+/*********************
+ *      INCLUDES
+ *********************/
+#include "lv_mywidget_template.h"
+#include "utils/lvgl/src/core/lv_obj.h"
+#include "utils/lvgl/src/core/lv_obj_class_private.h"          /* ต้องมี ไม่งั้น error */
+#include "utils/lvgl/src/misc/lv_assert.h"
+
+/*********************
+ *      DEFINES
+ *********************/
+LV_FONT_DECLARE(prasanmit_20);
+LV_FONT_DECLARE(prasanmit_25);
+LV_FONT_DECLARE(prasanmit_30);
+LV_FONT_DECLARE(prasanmit_40);
+LV_FONT_DECLARE(BebasNeueBold_num_45);
+
+/**********************
+ *      TYPEDEFS
+ **********************/
+
+/**********************
+ *  STATIC PROTOTYPES
+ **********************/
+static void lv_mywidget_template_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj);
+static void lv_mywidget_template_event(const lv_obj_class_t * class_p, lv_event_t * e);
+static void lv_mywidget_template_draw(lv_event_t * e);
+static void lv_mywidget_template_size_changed(lv_event_t *e);
+
+/**********************
+ *  STATIC VARIABLES
+ **********************/
+const lv_obj_class_t lv_mywidget_template_class  = {
+  .base_class         = &lv_obj_class,
+  .constructor_cb     = lv_mywidget_template_constructor,
+  .event_cb           = lv_mywidget_template_event,
+  .name               = "mywidget_template",
+  .instance_size      = sizeof(lv_mywidget_template_t),
+  .theme_inheritable  = LV_OBJ_CLASS_THEME_INHERITABLE_FALSE,
+  .width_def          = 200,
+  .height_def         = 200,
+};
+
+/**********************
+ *      MACROS
+ **********************/
+// #ifndef LV_MOD2
+// #define LV_MOD2(a, b)   (((int)(a) % (int)(b) + (int)(b)) % (int)(b))
+// #endif
+
+// #ifndef LV_MOD_F
+// #define LV_MOD_F(f, b)  (LV_MOD2(floor(f), (b)) + ((f) - floor(f)))
+// #endif
+
+// #ifndef LV_ANGLE360
+// #define LV_ANGLE360(a)  (LV_MOD_F((a), 360))
+// #endif
+
+/**********************
+ *   GLOBAL FUNCTIONS
+ **********************/
+lv_obj_t * lv_mywidget_template_create(lv_obj_t * parent)
+{
+  LV_LOG_INFO("begin");
+  lv_obj_t * obj = lv_obj_class_create_obj(&lv_mywidget_template_class, parent);
+  lv_obj_class_init_obj(obj);
+
+  lv_obj_remove_style_all(obj);
+  lv_obj_set_style_bg_color(obj, lv_color_white(), LV_PART_MAIN);
+  lv_obj_set_style_bg_opa(obj, 255, LV_PART_MAIN);
+
+  lv_obj_center(obj);    
+
+  return obj;
+}
+
+
+/*=====================
+ * Setter functions
+ *====================*/
+
+/*=====================
+ * Getter functions
+ *====================*/
+
+
+/**********************
+ *   STATIC FUNCTIONS
+ **********************/
+static void lv_mywidget_template_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+{
+  LV_UNUSED(class_p);
+  lv_mywidget_template_t * gauge = (lv_mywidget_template_t *)obj;
+  // gauge->color_begin  = lv_color_make(0, 0, 255);   /* blue */
+  // gauge->color_end    = lv_color_make(255, 0, 0);   /* red */
+  // gauge->color_bg     = lv_color_mix(lv_color_black(), lv_color_white(),180);
+}
+
+static void lv_mywidget_template_event(const lv_obj_class_t * class_p, lv_event_t * e)
+{
+    LV_UNUSED(class_p);
+
+    lv_result_t res;
+
+    /* Call the ancestor's event handler */
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code != LV_EVENT_DRAW_MAIN && code != LV_EVENT_DRAW_MAIN_END) {
+        res = lv_obj_event_base(&lv_mywidget_template_class, e);
+        if(res != LV_RESULT_OK) return;
+    }
+
+    if(code == LV_EVENT_DRAW_MAIN) {
+      lv_mywidget_template_draw(e);
+    }
+    else 
+    if(code == LV_EVENT_SIZE_CHANGED){
+      lv_mywidget_template_size_changed(e);
+    }
+}
+
+static void lv_mywidget_template_draw(lv_event_t * e){
+  lv_obj_t * obj = (lv_obj_t *) lv_event_get_current_target(e);
+  lv_mywidget_template_t * gauge = (lv_mywidget_template_t *)obj;
+  lv_layer_t * layer = lv_event_get_layer(e);
+
+  // วาดสี่เหลี่ยมพื้นหลังออกมา
+  lv_draw_rect_dsc_t rect_dsc;
+  lv_draw_rect_dsc_init(&rect_dsc);
+  lv_obj_init_draw_rect_dsc(obj, LV_PART_MAIN, &rect_dsc);
+  lv_draw_rect(layer, &rect_dsc, &obj->coords);
+
+}
+
+static void lv_mywidget_template_size_changed(lv_event_t *e){
+  // lv_obj_t * obj = (lv_obj_t *) lv_event_get_current_target(e);
+
+  // const lv_area_t *area_old = lv_event_get_old_size(e);
+  // int32_t w_old = lv_area_get_width(area_old);
+  // int32_t h_old = lv_area_get_height(area_old);
+
+  // int32_t w = lv_obj_get_width(obj);
+  // int32_t h = lv_obj_get_height(obj);
+
+  // if( w != w_old || h != h_old){
+  //   int32_t bg_left   = lv_obj_get_style_pad_left   (obj, LV_PART_MAIN);
+  //   int32_t bg_right  = lv_obj_get_style_pad_right  (obj, LV_PART_MAIN);
+  //   int32_t bg_top    = lv_obj_get_style_pad_top    (obj, LV_PART_MAIN);
+  //   int32_t bg_bottom = lv_obj_get_style_pad_bottom (obj, LV_PART_MAIN);
+
+  // }
+}

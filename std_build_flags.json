@@ -3,6 +3,7 @@
     "-w",
     "-std=c++17",
     "-fpermissive",
+    "-mwindows", 
 
     "-lbcrypt",
     "-lSDL2",

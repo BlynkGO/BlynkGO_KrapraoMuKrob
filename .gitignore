@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+.pio/
+build/
+*.pio
+
+.vscode/
+.idea/
+*.code-workspace

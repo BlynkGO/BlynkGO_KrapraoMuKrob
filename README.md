@@ -41,7 +41,6 @@
 ### 7. พร้อมใช้งาน BlynkGO_KrapraoMuKrob
 - เลือกเปลี่ยน บอร์ด ได้ใน platformio.ini
 - คุณจะสามารถ **build, upload/run** โปรเจคตามปกติผ่าน PlatformIO  
-  และนำกราฟิกที่ได้ ไปใช้ในโปรเจค จอสัมผัส BeeNeXT ได้ 
-
-![setup_03](setup_03.png)
-
+  และนำกราฟิกที่ได้ ไปใช้ในโปรเจค จอสัมผัส BeeNeXT ได้
+    
+  ![setup_03](setup_03.png)

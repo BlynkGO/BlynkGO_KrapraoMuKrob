@@ -1,16 +1,27 @@
 #include <BlynkGOv5.h>
 
-GRect rect;
+WinSerial COM_PORT("COM3");
+
+GGaugeRainbow gauge;
 
 void setup(){
   Serial.begin(9600); Serial.println();
   BlynkGO.begin();
   BlynkGO.window_title("My App");
 
-  rect.size(300,80);
-  rect.radius(20);
-  rect.border(5, TFT_WHITE);
-
+  COM_PORT.begin(9600);
+  static SoftTimer timer;
+  timer.setInterval(10,[](){
+    if(COM_PORT.available()){
+      String raw = COM_PORT.readStringUntil('\n');
+      if(raw.startsWith("[TEMP]")){
+        raw.replace("[TEMP]", ""); raw.trim();
+        float temp = raw.toFloat();
+        Serial.println(temp);
+        gauge = temp;
+      }
+    }
+  });
 }
 
 void loop(){

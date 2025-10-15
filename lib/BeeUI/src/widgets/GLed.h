@@ -50,6 +50,8 @@ class GLed : public GObject {
      */
     void color(color_t color);
 
+    color_t color();
+
     /**
      * Set the brightness of a LED object
      * @param bright    LV_LED_BRIGHT_MIN (max. dark) ... LV_LED_BRIGHT_MAX (max. light)
@@ -66,9 +68,11 @@ class GLed : public GObject {
      */
     void off();
 
-    inline void ON()                    { this->on();   this->event_send(EVENT_VALUE_CHANGED);  }
-    inline void OFF()                   { this->off();  this->event_send(EVENT_VALUE_CHANGED);  }
+    inline void ON()                    { this->on();  if(this->checkable()) this->checked(true);   }
+    inline void OFF()                   { this->off(); if(this->checkable()) this->checked(false);  }
 
+    inline void checkable(bool en)      { GObject::checkable(en);  if(this->checkable()) this->checked(this->isON()); }
+    inline bool checkable()             { return GObject::checkable(); }
 
     /**
      * Toggle the state of a LED
@@ -82,7 +86,6 @@ class GLed : public GObject {
     uint8_t brightness();
 
   private:
-
 
 };
 

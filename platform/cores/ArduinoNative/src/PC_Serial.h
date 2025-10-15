@@ -63,7 +63,8 @@ class PC_Serial {
         len = std::printf("%s", temp);
         if(temp != loc_buf){
             free(temp);
-        }
+        }        
+        fflush(stdout);
         return len;
     }
 };

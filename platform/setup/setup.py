@@ -4,6 +4,7 @@ import zipfile
 import shutil
 import subprocess
 import hashlib
+import psutil
 from pathlib import Path
 
 # ==========================================================
@@ -99,8 +100,31 @@ def remove_old_toolchain():
             print(f"[x] ลบไฟล์เก่า: {item}")
             item.unlink()
 
+def get_uncompressed_size(zip_path):
+    """คืนค่าขนาดทั้งหมดของไฟล์ใน zip (หน่วยเป็น bytes)"""
+    total = 0
+    with zipfile.ZipFile(zip_path, "r") as z:
+        for info in z.infolist():
+            total += info.file_size
+    return total
+
+def check_free_space(path, required_bytes):
+    """ตรวจสอบว่าพื้นที่ว่างพอไหม"""
+    usage = psutil.disk_usage(path)
+    free_bytes = usage.free
+    if free_bytes < required_bytes:
+        raise OSError(
+            f"[✗] พื้นที่ไม่เพียงพอ ต้องการ {required_bytes/1e9:.2f} GB "
+            f"แต่เหลือ {free_bytes/1e9:.2f} GB"
+        )
+    print(f"[✓] พื้นที่เพียงพอ: ต้องการ {required_bytes/1e9:.2f} GB เหลือ {free_bytes/1e9:.2f} GB")
+
 def extract_toolchain(zip_path):
     """แตกไฟล์ zip ไปที่ ROOT_DIR"""
+    print(f"[⇪] กำลังตรวจสอบพื้นที่ ...")
+    uncompressed_size = get_uncompressed_size(zip_path)
+    check_free_space(ROOT_DIR, uncompressed_size * 1.1)  # เผื่ออีก 10%
+
     print(f"[⇪] กำลังแตกไฟล์ {zip_path} ...")
     with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(ROOT_DIR)

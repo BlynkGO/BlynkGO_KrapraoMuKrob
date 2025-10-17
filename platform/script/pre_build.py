@@ -6,6 +6,28 @@ from SCons.Script import Import
 Import("env")
 
 # ==========================================================
+# ตรวจสอบและลบ program.exe ถ้ามีอยู่ใน .pio/build/<env>
+# ==========================================================
+try:
+    project_dir = env["PROJECT_DIR"]
+    env_name = env["PIOENV"]
+    exe_path = os.path.join(project_dir, ".pio", "build", env_name, "program.exe")
+
+    if os.path.isfile(exe_path):
+        print(f"[INFO] Found existing {exe_path}, attempting to remove...")
+        try:
+            os.remove(exe_path)
+            print("[INFO] Removed old program.exe successfully.")
+        except PermissionError:
+            print("[WARNING] program.exe is currently in use — skipping removal.")
+        except Exception as e:
+            print(f"[WARNING] Could not remove program.exe: {e}")
+    else:
+        print("[INFO] No existing program.exe found.")
+except Exception as e:
+    print(f"[ERROR] Failed checking for program.exe: {e}")
+
+# ==========================================================
 # ตั้งค่า USER_DIR และ toolchain
 # ==========================================================
 user_path = expanduser("~")  # path ไปยัง home ของ user

@@ -1,27 +1,48 @@
 import os
 import json
+import subprocess
+import time
 from os.path import join, expanduser
 from SCons.Script import Import
 
 Import("env")
 
 # ==========================================================
-# ตรวจสอบและลบ program.exe ถ้ามีอยู่ใน .pio/build/<env>
+# ตรวจสอบและ kill + ลบ program.exe ถ้ามีอยู่ใน .pio/build/<env>
 # ==========================================================
 try:
     project_dir = env["PROJECT_DIR"]
     env_name = env["PIOENV"]
-    exe_path = os.path.join(project_dir, ".pio", "build", env_name, "program.exe")
+    exe_path = join(project_dir, ".pio", "build", env_name, "program.exe")
 
     if os.path.isfile(exe_path):
-        print(f"[INFO] Found existing {exe_path}, attempting to remove...")
+        print(f"[INFO] Found existing {exe_path}, attempting to kill and remove...")
+
+        # พยายาม kill process
         try:
-            os.remove(exe_path)
-            print("[INFO] Removed old program.exe successfully.")
-        except PermissionError:
-            print("[WARNING] program.exe is currently in use — skipping removal.")
+            subprocess.run(["taskkill", "/F", "/IM", "program.exe"],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            print("[INFO] Sent kill signal to program.exe")
         except Exception as e:
-            print(f"[WARNING] Could not remove program.exe: {e}")
+            print(f"[WARNING] Could not send kill signal to program.exe: {e}")
+
+        # รอจนไฟล์สามารถลบได้ หรือ timeout 5 วินาที
+        max_wait = 5  # วินาที
+        waited = 0
+        while os.path.isfile(exe_path) and waited < max_wait:
+            try:
+                os.remove(exe_path)
+                print("[INFO] Removed old program.exe successfully.")
+                break
+            except PermissionError:
+                time.sleep(0.2)
+                waited += 0.2
+            except Exception as e:
+                print(f"[WARNING] Could not remove program.exe: {e}")
+                break
+        else:
+            if os.path.isfile(exe_path):
+                print("[WARNING] program.exe is still locked — skipping removal.")
     else:
         print("[INFO] No existing program.exe found.")
 except Exception as e:

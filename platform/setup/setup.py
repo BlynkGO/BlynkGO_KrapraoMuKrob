@@ -6,6 +6,7 @@ import json
 import shutil
 import subprocess
 import hashlib
+import stat
 from pathlib import Path
 
 # -------------------------------
@@ -100,10 +101,27 @@ def extract_zip(zip_path, target_dir):
     subprocess.run(cmd, check=True)
     print(f"[✓] แตกไฟล์เสร็จสิ้นที่ {target_dir}")
 
+# def remove_old_dir(path):
+#     if path.exists():
+#         print(f"[x] ลบโฟลเดอร์เก่า: {path}")
+#         shutil.rmtree(path)
+
 def remove_old_dir(path):
     if path.exists():
         print(f"[x] ลบโฟลเดอร์เก่า: {path}")
-        shutil.rmtree(path)
+        # ลองลบซ้ำได้หลายครั้ง (เผื่อ process ปล่อยไฟล์ช้า)
+        for i in range(3):
+            try:
+                def on_rm_error(func, path, exc_info):
+                    os.chmod(path, stat.S_IWRITE)
+                    func(path)
+                shutil.rmtree(path, onerror=on_rm_error)
+                break
+            except PermissionError:
+                print(f"[!] ลบไม่สำเร็จ (รอบที่ {i+1}) — รอ 1 วินาทีแล้วลองใหม่...")
+                time.sleep(1)
+        else:
+            print(f"[✗] ไม่สามารถลบ {path} ได้ทั้งหมด — บางไฟล์อาจถูกใช้งานอยู่")
 
 def get_tool_info(name):
     with open(JSON_FILE, "r", encoding="utf-8") as f:

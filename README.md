@@ -34,7 +34,7 @@ and supports **HTTP Client** and **MQTT Client**.
 - Open VS Code → **File → Open Folder** → select the folder where you extracted the project  
 - Wait for **PlatformIO** to load and set up the environment completely  
 
-### 6. Install Toolchain (One-Time Setup)
+### 6. Install Toolchain and Tools (One-Time Setup)
 - Navigate to the folder: **BlynkGO_KraproMuKrob/platform/setup**
 - Right-click and select `Open in Integrated Terminal` to open the terminal.  
 ![setup_01](setup_01.png)
@@ -47,5 +47,7 @@ and supports **HTTP Client** and **MQTT Client**.
 - You can select/change the board in `platformio.ini`.
 - You can **build and upload/run** the project normally through PlatformIO,  
   and use the generated graphics in your BeeNeXT touchscreen projects.
-![setup_03](setup_03.png)
+![setup_03](setup_03.png)  
+  
+  
 

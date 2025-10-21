@@ -1,46 +1,51 @@
 # BlynkGO_KrapraoMuKrob
-**BlynkGO กระเพราหมูกรอบ**
+**BlynkGO KrapraoMuKrob**  
 
-**โปรแกรมนี้เป็นตัวสร้างโปรแกรมกราฟิกสำหรับ Windows**  
-ใช้สำหรับ **ออกแบบกราฟิกสำหรับจอ BeeNeXT** โดยช่วยให้ผู้ใช้สร้าง UI และฟังก์ชันต่าง ๆ ได้ง่ายขึ้น
+This program is a graphical program generator for **Windows Application**,  
+designed to create **GUI in Arduino code style**.  
 
+It allows users to design UI and generate code  
+that can run on **BeeNeXT touchscreen projects**.   
+  
+Additionally, it can connect to any MCU via **COM Port**   
+and supports **HTTP Client** and **MQTT Client**.  
 
-## วิธีติดตั้ง
+---
 
-### 1. ติดตั้ง Python
-- ดาวน์โหลด Python สำหรับ Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)  
-- **ปิด AntiVirus & Windows Defender** ก่อนติดตั้ง  
-- ให้เลือก **Add Python to PATH** ตอนติดตั้ง  
+## Installation
 
-### 2. ติดตั้ง Visual Studio Code
-- ดาวน์โหลด VS Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
-- ติดตั้งให้เรียบร้อย
+### 1. Install Python
+- Download Python for Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)  
+- **Disable Antivirus & Windows Defender** before installation  
+- Make sure to check **Add Python to PATH** during installation  
 
-### 3. ติดตั้ง PlatformIO Extension ใน VS Code
-- เปิด VS Code → ไปที่ Extensions → ค้นหา `PlatformIO IDE` → **ติดตั้ง**
+### 2. Install Visual Studio Code
+- Download VS Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)  
+- Install it on your system
 
-### 4. ดาวน์โหลด BlynkGO_KraproMuKrob
-- ดาวน์โหลด **BlynkGO_KrapraoMuKrob**  
-- **แตกไฟล์ ZIP** ลงในโฟลเดอร์ใดโฟลเดอร์หนึ่งบนเครื่องคุณ  
+### 3. Install PlatformIO Extension in VS Code
+- Open VS Code → go to **Extensions** → search for `PlatformIO IDE` → **Install**
 
-### 5. เปิดโปรเจคใน VS Code
-- เปิด VS Code → **File → Open Folder** → เลือกโฟลเดอร์โปรเจคที่แตก ZIP มา  
-- รอให้ **PlatformIO โหลดและติดตั้ง environment** ให้ครบถ้วน  
+### 4. Download BlynkGO_KrapraoMuKrob
+- Download the **BlynkGO_KrapraoMuKrob** ZIP file  
+- **Extract** the ZIP into any folder on your computer  
 
-### 6. ติดตั้ง Toolchain (ทำครั้งเดียว)
-- เข้าไปที่โฟลเดอร์: **BlynkGO_KraproMuKrob/platform/setup**
-- เมาส์ขวา เลือกเมนู `Open in Integrated Termimal` เพื่อเปิด Terminal ขึ้นมา
+### 5. Open the project in VS Code
+- Open VS Code → **File → Open Folder** → select the folder where you extracted the project  
+- Wait for **PlatformIO** to load and set up the environment completely  
+
+### 6. Install Toolchain (One-Time Setup)
+- Navigate to the folder: **BlynkGO_KraproMuKrob/platform/setup**
+- Right-click and select `Open in Integrated Terminal` to open the terminal.  
 ![setup_01](setup_01.png)
 
-  
-- พิมพ์คำสั่ง `> python setup.py`
+- Type the command `> python setup.py`
 ![setup_02](setup_02.png)
 
 
+### 7. Ready to Use BlynkGO_KrapraoMuKrob
+- You can select/change the board in `platformio.ini`.
+- You can **build and upload/run** the project normally through PlatformIO,  
+  and use the generated graphics in your BeeNeXT touchscreen projects.
+![setup_03](setup_03.png)
 
-### 7. พร้อมใช้งาน BlynkGO_KrapraoMuKrob
-- เลือกเปลี่ยน บอร์ด ได้ใน platformio.ini
-- คุณจะสามารถ **build, upload/run** โปรเจคตามปกติผ่าน PlatformIO  
-  และนำกราฟิกที่ได้ ไปใช้ในโปรเจค จอสัมผัส BeeNeXT ได้
-    
-  ![setup_03](setup_03.png)

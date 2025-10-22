@@ -6,6 +6,7 @@
 #include <WinTime.h>
 #include <tinyfiledialogs.h>
 #include <system_silently.h>
+#include <BeeExec.h>
 #include "./utils/lvgl/lvgl.h"
 #include "./widgets/GWidgets.h"
 #include <cstdlib>

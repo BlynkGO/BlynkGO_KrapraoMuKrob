@@ -15,7 +15,8 @@
     "-Iplatform/libraries/TinyFileDialog/src",
     "-Iplatform/libraries/SystemSilently/src",
     "-Iplatform/libraries/WinTimeAlarm/src",
-
+    "-Iplatform/libraries/BeeExec/src",
+  
     "-Ilib/BeeNext/src",
     "-Ilib/BeeUI/src",
     "-Ilib/BeeUI/src/utils/lvgl",

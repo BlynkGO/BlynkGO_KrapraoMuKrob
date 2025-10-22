@@ -49,5 +49,51 @@ and supports **HTTP Client** and **MQTT Client**.
   and use the generated graphics in your BeeNeXT touchscreen projects.
 ![setup_03](setup_03.png)  
   
+---
+  
+## 📖 How to convert Image for using in your project.
+
+### 1️⃣ Prepare Your Images
+Place the image files (PNG, JPG, BMP) that you want to convert into the folder:
+`src/images`
+
+### 2️⃣ Convert Standard Images (PNG, JPG, BMP)
+Open a Terminal in the `src/images` folder containing the images to convert, then type:
+
+```
+> imgconv filename.png
+```
+
+or
+
+```
+> imgconv filename.jpg
+> imgconv filename.bmp
+```
+
+### 3️⃣ Convert PNG Images with Transparency
+To preserve transparency in the image, add the `-t` option:
+
+```
+> imgconv filename.png -t
+```
+
+🖼️ The converted files will be saved in the folder:
+`src/images/output`
+
+### 4️⃣ Set Your Own Output Filename
+To specify a custom output filename, add the `-o` option followed by the desired name:
+
+```
+> imgconv filename.png -o desired_name
+```
+
+* Example: *
+
+```
+> imgconv logo.png -o my_logo
+```
+
+This will generate a file named `my_logo.c` in `src/images/output`.
   
 

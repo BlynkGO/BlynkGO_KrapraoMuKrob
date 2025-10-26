@@ -45,8 +45,8 @@
               "host": "i686-mingw32",
               "url": "https://github.com/BlynkGO/BeeArduino/releases/download/v1.3.1/BlynkGOv5_tools_v1.0.zip",
               "archiveFileName": "BlynkGOv5_tools_v1.0.zip",
-              "checksum": "SHA-256:7148cba70933972ff219cb01e52298ee6f6bc76cca6d262f56cfcc7bbb0dff49",
-              "size": 16777
+              "checksum": "SHA-256:a7373e01bcc49d778208e853ee40961473ca9aa3072c9143e3088ec6d921bcdb",
+              "size": 17416
             }
           ]
         }

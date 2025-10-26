@@ -39,7 +39,7 @@
         },
         {
           "name": "BlynkGOv5_tools",
-          "version": "v1.0",
+          "version": "v1.1",
           "systems": [
             {
               "host": "i686-mingw32",

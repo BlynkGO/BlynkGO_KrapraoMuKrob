@@ -47,10 +47,10 @@ class GBar : public GObject
      */
     inline  int   toInt()                                   { return this->value();                               }
 
-    using GObject::color;
-    using GObject::radius;
-    using GObject::corner_radius;
-    using GObject::border;
+    // using GObject::color;
+    // using GObject::radius;
+    // using GObject::corner_radius;
+    // using GObject::border;
  
     // inline void color(color_t color)                     { GObject::bg_color(color, GPART_INDICATOR);  GObject::bg_color(TFT_COLOR_MIX(color, TFT_WHITE, 200), GPART_MAIN);  }
     inline void color(color_t color)                        { GObject::bg_color(color, GPART_INDICATOR);                                  }

@@ -74,12 +74,12 @@ class GSwitch : public GObject {
     * Design functions
     *====================*/
     inline void color( color_t color )                                  { GObject::bg_color(color, (gstate_t)((int)GPART_INDICATOR | (int) (GSTATE_ON)));  }
-    using GObject::color;
+    // using GObject::color;
 
     inline void knob_color( color_t color)                              { GObject::bg_color(color, GPART_KNOB);  }
     inline void knob_color( color_t color, gstate_t gstate )            { GObject::bg_color(color, (gstate_t)((int)GPART_KNOB | (int) ((gstate==GSTATE_ON )? GSTATE_ON: GSTATE_OFF))); }
     inline void radius( int32_t r)                                      { GObject::radius(r); GObject::radius(r, GPART_INDICATOR);  GObject::radius(r, GPART_KNOB); }
-    using GObject::radius;
+    // using GObject::radius;
 
   private:
 

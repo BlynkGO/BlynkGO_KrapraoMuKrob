@@ -145,11 +145,17 @@ class GLabel : public GObject, public String {
      */
     void long_mode( long_mode_t long_mode);
 
-    inline void long_mode(long_mode_t long_mode, int32_t width, uint32_t speed_pps=25){
+    inline void long_mode(long_mode_t long_mode, int32_t width){
+      this->long_mode(long_mode);
+      this->width(width);
+    }
+
+    inline void long_mode(long_mode_t long_mode, int32_t width, uint32_t speed_pps){
       this->long_mode(long_mode);
       this->width(width);
       this->anim_speed(speed_pps);
     }
+
 
     /**
      * Set where text selection should start

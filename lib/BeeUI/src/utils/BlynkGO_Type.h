@@ -301,6 +301,7 @@ typedef obj_tree_walk_res_t (*obj_tree_walk_cb_t)(obj_t *, void *);
  */
 enum gstate_t{
     GSTATE_DEFAULT     =  0x0000,
+    GSTATE_RELEASED    =  GSTATE_DEFAULT,  // BlynkGO
     GSTATE_OFF         =  GSTATE_DEFAULT,  // BlynkGO
     GSTATE_CHECKED     =  0x0001,
     GSTATE_ON          =  GSTATE_CHECKED,  // BlynkGO

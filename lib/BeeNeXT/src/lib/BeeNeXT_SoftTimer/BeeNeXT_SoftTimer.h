@@ -43,6 +43,9 @@ class SoftTimer {
     void ready_cb(swtimer_cb_t fn_ready);
     void ready_cb(swtimer_param_cb_t fn_ready_param);
 
+    inline void onFinised(swtimer_cb_t fn_ready)              { this->ready_cb(fn_ready);        }
+    inline void onFinised(swtimer_param_cb_t fn_ready_param)  { this->ready_cb(fn_ready_param);  }
+
     void pause();       // สำหรับ timer ที่ setInterval แล้วต้องการให้หยุดทำงานชั่วคราว
     void resume();      // สำหรับ timer ที่ setInterval หลังมีการ pause() ต้องการให้กลับมาทำงานต่อ
 

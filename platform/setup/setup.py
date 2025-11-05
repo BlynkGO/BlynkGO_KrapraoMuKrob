@@ -4,6 +4,7 @@ import os
 import sys
 import json
 import shutil
+import zipfile
 import subprocess
 import hashlib
 import stat
@@ -90,15 +91,39 @@ def get_uncompressed_size(zip_path):
     # ถ้าอยากได้ exact อาจใช้ zipfile แต่ WinRAR จะตรวจสอบอีกที
     return zip_path.stat().st_size * 3  # เผื่อไว้ 3 เท่า
 
+# def extract_zip(zip_path, target_dir):
+#     """แตกไฟล์ด้วย WinRAR"""
+#     target_dir.mkdir(exist_ok=True)
+#     print(f"[⇪] กำลังตรวจสอบพื้นที่ ...")
+#     estimated_size = get_uncompressed_size(zip_path)
+#     check_free_space(target_dir, estimated_size)
+#     print(f"[⇪] กำลังแตกไฟล์ {zip_path} ไปที่ {target_dir} ...")
+#     cmd = [WINRAR_EXE, "x", "-ibck", "-y", str(zip_path), str(target_dir)]
+#     subprocess.run(cmd, check=True)
+#     print(f"[✓] แตกไฟล์เสร็จสิ้นที่ {target_dir}")
+
 def extract_zip(zip_path, target_dir):
-    """แตกไฟล์ด้วย WinRAR"""
+    """แตกไฟล์ zip โดยใช้ WinRAR ถ้ามี, ถ้าไม่มีจะใช้ zipfile ของ Python"""
+    zip_path = Path(zip_path)
+    target_dir = Path(target_dir)
     target_dir.mkdir(exist_ok=True)
+    
     print(f"[⇪] กำลังตรวจสอบพื้นที่ ...")
     estimated_size = get_uncompressed_size(zip_path)
     check_free_space(target_dir, estimated_size)
+
     print(f"[⇪] กำลังแตกไฟล์ {zip_path} ไปที่ {target_dir} ...")
-    cmd = [WINRAR_EXE, "x", "-ibck", "-y", str(zip_path), str(target_dir)]
-    subprocess.run(cmd, check=True)
+
+    if Path(WINRAR_EXE).exists():
+        # ถ้ามี WinRAR ติดตั้งไว้ ใช้ WinRAR แตกไฟล์
+        cmd = [WINRAR_EXE, "x", "-ibck", "-y", str(zip_path), str(target_dir)]
+        subprocess.run(cmd, check=True)
+    else:
+        # ถ้าไม่มี WinRAR ใช้ zipfile แตกแทน
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(target_dir)
+            print("[ℹ️] ใช้ zipfile แตกไฟล์ (ไม่ได้ติดตั้ง WinRAR)")
+
     print(f"[✓] แตกไฟล์เสร็จสิ้นที่ {target_dir}")
 
 # def remove_old_dir(path):

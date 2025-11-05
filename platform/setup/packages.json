@@ -39,14 +39,14 @@
         },
         {
           "name": "BlynkGOv5_tools",
-          "version": "v1.1",
+          "version": "v1.2",
           "systems": [
             {
               "host": "i686-mingw32",
-              "url": "https://github.com/BlynkGO/BeeArduino/releases/download/v1.3.1/BlynkGOv5_tools_v1.1.zip",
-              "archiveFileName": "BlynkGOv5_tools_v1.1.zip",
-              "checksum": "SHA-256:c41af7d06246db8ae4a5c4b2511d1a86ca4010d441c2b064b42ec01c69595c37",
-              "size": 17816
+              "url": "https://github.com/BlynkGO/BeeArduino/releases/download/v1.3.1/BlynkGOv5_tools_v1.2.zip",
+              "archiveFileName": "BlynkGOv5_tools_v1.2.zip",
+              "checksum": "SHA-256:0148bb685529d14a1c1f0833abc64c35e68b6f8992e119332cdce00442360eb7",
+              "size": 19368
             }
           ]
         }

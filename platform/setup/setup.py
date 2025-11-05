@@ -1,5 +1,5 @@
 
-# v0.9.2
+# setup.py v0.9.3
 import os
 import sys
 import json
@@ -175,6 +175,33 @@ def main():
                 print(f"[!] ไม่สามารถคัดลอก {cmd_file.name}: {e}")
 
     print("\n[✓] ทุกขั้นตอนเสร็จสมบูรณ์!")
+
+    # ======================================================
+    # บันทึกตำแหน่งโปรเจกต์ลง config.json
+    # ======================================================
+    try:
+        project_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+        config_path = ROOT_DIR / "config.json"
+        config_data = {"project_home": project_home}
+
+        if config_path.exists():
+            try:
+                with open(config_path, "r", encoding="utf-8") as f:
+                    old_data = json.load(f)
+                old_data.update(config_data)
+                config_data = old_data
+            except Exception:
+                pass
+
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(config_data, f, indent=2, ensure_ascii=False)
+
+        print(f"\n[✓] บันทึกตำแหน่งโปรเจกต์เรียบร้อย: {config_path}")
+        print(f"📂 Project path: {project_home}")
+    except Exception as e:
+        print(f"[!] ไม่สามารถบันทึก config.json: {e}")
+
+# ==========================================================
 
 if __name__ == "__main__":
     main()

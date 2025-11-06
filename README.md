@@ -31,7 +31,8 @@ and supports **HTTP Client** and **MQTT Client**.
 - **Extract** the ZIP into any folder on your computer  
 
 ### 5. Open the project in VS Code
-- Open VS Code → **File → Open Folder** → select the folder where you extracted the project  
+- Open VS Code → **File → Open Folder**  
+  → select the folder **BlynkGO_KrapraoMuKrob** where you extracted the project  
 - Wait for **PlatformIO** to load and set up the environment completely  
 
 ### 6. Ready to Use BlynkGO_KrapraoMuKrob

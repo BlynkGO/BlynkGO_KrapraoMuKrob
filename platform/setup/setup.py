@@ -27,7 +27,8 @@ except ImportError:
 JSON_FILE = os.path.join(os.path.dirname(__file__), "packages.json")
 ROOT_DIR = Path.home() / ".beearduino"
 DOWNLOAD_DIR = ROOT_DIR / "download"
-ARIA2C_EXE = "aria2c.exe"  # ต้องอยู่ใน PATH หรือ full path
+# ARIA2C_EXE = "aria2c.exe"  # ต้องอยู่ใน PATH หรือ full path
+ARIA2C_EXE = os.path.join(os.path.dirname(__file__), "aria2c.exe")
 WINRAR_EXE = r"C:\Program Files\WinRAR\WinRAR.exe"  # path ของ WinRAR
 
 # ==========================================================

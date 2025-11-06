@@ -23,7 +23,8 @@ except ImportError:
 # ==========================================================
 # CONFIG
 # ==========================================================
-JSON_FILE = "packages.json"  # ไฟล์ JSON
+# JSON_FILE = "packages.json"  # ไฟล์ JSON
+JSON_FILE = os.path.join(os.path.dirname(__file__), "packages.json")
 ROOT_DIR = Path.home() / ".beearduino"
 DOWNLOAD_DIR = ROOT_DIR / "download"
 ARIA2C_EXE = "aria2c.exe"  # ต้องอยู่ใน PATH หรือ full path

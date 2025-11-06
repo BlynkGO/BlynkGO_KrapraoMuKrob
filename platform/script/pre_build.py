@@ -5,6 +5,51 @@ import time
 from os.path import join, expanduser
 from SCons.Script import Import
 
+import sys
+# ==========================================================
+# ตรวจสอบ ~/.beearduino/config.json ถ้าไม่มี ให้รัน setup.py
+# ==========================================================
+user_path = expanduser("~")
+bee_dir = join(user_path, ".beearduino")
+config_file = join(bee_dir, "config.json")
+
+project_dir = os.getcwd()
+setup_script = join(project_dir, "platform", "setup", "setup.py")
+
+def run_setup():
+    if os.path.isfile(setup_script):
+        print(f"[INFO] Running setup: {setup_script}")
+        try:
+            subprocess.run([sys.executable, setup_script], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"[ERROR] setup.py exited with error: {e}")
+        except Exception as e:
+            print(f"[ERROR] Failed to run setup.py: {e}")
+    else:
+        print(f"[ERROR] setup.py not found at: {setup_script}")
+
+if not os.path.isfile(config_file):
+    print(f"[INFO] config.json not found — running setup...")
+    run_setup()
+else:
+    print(f"[INFO] config.json found at: {config_file}")
+    try:
+        with open(config_file, "r", encoding="utf-8") as f:
+            config = json.load(f)
+        project_home = config.get("project_home", "")
+
+        if os.path.normpath(project_home) != os.path.normpath(project_dir):
+            print(f"[WARN] project_home mismatch. Updating config.json...")
+            config["project_home"] = project_dir
+            with open(config_file, "w", encoding="utf-8") as f:
+                json.dump(config, f, indent=2, ensure_ascii=False)
+            print(f"[INFO] Updated project_home → {project_dir}")
+        else:
+            print(f"[INFO] project_home matches current project.")
+    except Exception as e:
+        print(f"[ERROR] Failed to read or update config.json: {e}")
+
+
 Import("env")
 
 # ==========================================================

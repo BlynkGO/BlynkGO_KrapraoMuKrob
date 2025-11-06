@@ -41,7 +41,7 @@ and supports **HTTP Client** and **MQTT Client**.
     
   (First time: the toolchain and other necessary tools will be installed automatically.)
     
-![setup_03](setup_03.png)  
+![kmk_build](kmk_build.png)  
   
 ---
   

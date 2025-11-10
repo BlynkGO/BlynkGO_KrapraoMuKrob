@@ -6,7 +6,6 @@
 #include <WinTime.h>
 #include <tinyfiledialogs.h>
 #include <system_silently.h>
-#include <BeeExec.h>
 #include "./utils/lvgl/lvgl.h"
 #include "./widgets/GWidgets.h"
 #include <cstdlib>
@@ -47,14 +46,17 @@ typedef void (*WiFiDisconnectedCb)(void);
 #define ROTATION_DEFAULT      0
 #define ROTATION_VERTICAL     1
 
+extern int32_t lcd_width;
+extern int32_t lcd_height;
+
 class BeeUI {
   public:
     BeeUI() {}
     void begin();
     void update();
 
-    int32_t width();
-    int32_t height();
+    inline int32_t width()        { return lcd_width;   }
+    inline int32_t height()       { return lcd_height;  }
 
     __attribute__ ((always_inline)) inline Point center()                   { return Point(width()/2, height()/2);  }
     __attribute__ ((always_inline)) inline Point centerpoint()              { return GScreen.centerpoint();         }

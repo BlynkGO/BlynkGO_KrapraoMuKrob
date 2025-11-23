@@ -214,6 +214,11 @@ class GObject  {
       this->grid_align(column_align, row_align);
     }
 
+    // inline void grid_cell(int32_t col, int32_t row, int32_t col_span, int32_t row_span) {
+    //   if(!isCreated()) create();
+    //   lv_obj_set_grid_cell(obj, LV_GRID_ALIGN_STRETCH, col, col_span, LV_GRID_ALIGN_STRETCH, row, row_span);
+    // }
+
     inline void scrollbar(scrollbar_mode_t mode, bool scroll_hor =false , bool scroll_ver = true ){ 
       GObject::scrollbar_mode(mode); GObject::scroll_dir( (dir_t) ((int)(scroll_ver? DIR_VER : DIR_NONE ) | (int)(scroll_hor? DIR_HOR : DIR_NONE )));
     }

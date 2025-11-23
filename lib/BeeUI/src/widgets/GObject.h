@@ -73,6 +73,38 @@ extern lv_group_t * pc_keyboard_group;
 
 // point_t touch_pt();   //absolute touch point
 
+#include <type_traits>
+
+// template สำหรับ OR enum bitmask
+template <typename Enum>
+constexpr
+typename std::enable_if<std::is_enum<Enum>::value, Enum>::type
+operator|(Enum lhs, Enum rhs) {
+  using underlying = typename std::underlying_type<Enum>::type;
+  return static_cast<Enum>(
+      static_cast<underlying>(lhs) | static_cast<underlying>(rhs)
+  );
+}
+
+// สามารถเพิ่ม operator & | ^ ~ ได้เหมือนกัน
+template <typename Enum>
+constexpr
+typename std::enable_if<std::is_enum<Enum>::value, Enum>::type
+operator&(Enum lhs, Enum rhs) {
+  using underlying = typename std::underlying_type<Enum>::type;
+  return static_cast<Enum>(
+      static_cast<underlying>(lhs) & static_cast<underlying>(rhs)
+  );
+}
+
+template <typename Enum>
+constexpr
+typename std::enable_if<std::is_enum<Enum>::value, Enum>::type
+operator~(Enum e) {
+  using underlying = typename std::underlying_type<Enum>::type;
+  return static_cast<Enum>(~static_cast<underlying>(e));
+}
+
 class GObject  {
   public:
     GObject(GWidget& parent=GScreen)                        : _par(&parent) {}

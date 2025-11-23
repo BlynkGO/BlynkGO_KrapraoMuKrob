@@ -89,5 +89,6 @@ void Windows_CopyTextToClipboard(const char* text);
 extern lv_indev_t * mouse;
 extern lv_indev_t * pc_keyboard;
 extern GLabel lb_status;
+extern GLabel lb_mouse;
 
 #endif

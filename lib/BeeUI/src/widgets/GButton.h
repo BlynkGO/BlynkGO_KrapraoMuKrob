@@ -144,6 +144,9 @@ class GButton : public GContainer {
 
     void link(obj_t* obj);
 
+    inline GLabel* label()                              { create(); if(_u_label == NULL) return NULL; return (GLabel*) _u_label.get();  }
+    inline GImage* icon()                               { create(); if(_u_icon == NULL) return NULL;  return (GImage*) _u_icon.get();   }
+
     std::unique_ptr<GImage> _u_icon;
     std::unique_ptr<GLabel> _u_label;
     button_type_t _btn_type = BUTTON_PUSH;

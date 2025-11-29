@@ -10,6 +10,7 @@ that can run on **BeeNeXT touchscreen projects**.
 Additionally, it can connect to any MCU via **COM Port**   
 and supports **HTTP Client** and **MQTT Client**.  
 
+---
 # Installation
 
 ## 1. Install Python
@@ -81,7 +82,22 @@ git pull
     
 ![kmk_build](kmk_build.png)  
   
-  
+---
+## Create a New BlynkGO Project
+
+* In VS Code, **open the integrated terminal**:
+
+  * Go to the menu: `Terminal → New Terminal` (or use the shortcut `Ctrl+``)
+  * Make sure the terminal is in the folder where you want to create your project
+* Run the command:
+
+```bash
+> new_blynkgo
+```
+
+* Follow the prompts to generate a new BlynkGO project structure
+
+---  
 ## 📖 How to convert Image for using in your project.
 
 ### 1️⃣ Prepare Your Images

@@ -25,7 +25,8 @@
 
 #include "GObject.h"
 
-#define CHART_POINT_NONE     (INT32_MAX)
+#define CHART_POINT_NONE          (INT32_MAX)
+#define CHART_TOUCH_POPUP_SKIP    ""
 
 //----------------------------------------
 namespace BLYNKGO_V5 {

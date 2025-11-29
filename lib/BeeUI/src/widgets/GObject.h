@@ -930,6 +930,10 @@ class GObject  {
     void pad_row(int32_t value, style_selector_t selector=GPART_MAIN);
     void pad_column(int32_t value, style_selector_t selector=GPART_MAIN);
     inline void pad_inner(int32_t value, style_selector_t selector=GPART_MAIN)                    { this->pad_row(value,selector); this->pad_column(value,selector); }
+    inline void grid_gap(int32_t value, style_selector_t selector=GPART_MAIN)                     { this->pad_row(value,selector); this->pad_column(value,selector); }  
+    inline void gap(int32_t value, style_selector_t selector=GPART_MAIN)                          { this->pad_row(value,selector); this->pad_column(value,selector); }
+    inline void row_gap(int32_t value, style_selector_t selector=GPART_MAIN)                      { this->pad_row(value,selector);    }
+    inline void column_gap(int32_t value, style_selector_t selector=GPART_MAIN)                   { this->pad_column(value,selector); }  
 
     inline void padding_top(int32_t value, style_selector_t selector=GPART_MAIN)                  { this->pad_top(value,selector);    }
     inline void padding_bottom(int32_t value, style_selector_t selector=GPART_MAIN)               { this->pad_bottom(value,selector); }

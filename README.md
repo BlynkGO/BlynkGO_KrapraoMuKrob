@@ -91,7 +91,7 @@ git pull
 
 * In VS Code, **open the integrated terminal**:
 
-  * Go to the menu: `Terminal → New Terminal` (or use the shortcut `Ctrl+``)
+  * Go to the menu: `Terminal → New Terminal` (or use the shortcut `` Ctrl+` `` )
   * Make sure the terminal is in the folder where you want to create your project
 * Run the command:
 

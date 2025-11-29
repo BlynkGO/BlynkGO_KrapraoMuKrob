@@ -6,6 +6,3 @@
 #define BLYNKGO_KMK_VERSION_MINOR   9
 /** Patch version number (x.x.X) */
 #define BLYNKGO_KMK_VERSION_PATCH   4
-
-// git update-index --skip-worktree src/*
-// git update-index --no-skip-worktree src/*

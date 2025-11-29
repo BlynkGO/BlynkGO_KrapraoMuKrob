@@ -54,6 +54,8 @@ git clone https://github.com/BlynkGO/BlynkGO_KrapraoMuKrob
 cd BlynkGO_KrapraoMuKrob
 ```
 
+**Note:**
+
 * To protect your project in the **src/** folder from being overwritten during future updates,  
   run the following command to ignore local changes:
 
@@ -66,6 +68,7 @@ git update-index --skip-worktree src/*
 ```bash
 git pull
 ```
+
 
 ## 6. Open the project in VS Code
 

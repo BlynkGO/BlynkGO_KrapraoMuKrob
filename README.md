@@ -10,41 +10,77 @@ that can run on **BeeNeXT touchscreen projects**.
 Additionally, it can connect to any MCU via **COM Port**   
 and supports **HTTP Client** and **MQTT Client**.  
 
----
+# Installation
 
-## Installation
+## 1. Install Python
 
-### 1. Install Python
-- Download Python for Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)  
-- **Disable Antivirus & Windows Defender** before installation  
-- Make sure to check **Add Python to PATH** during installation  
+* Download Python for Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
+* **Disable Antivirus & Windows Defender** before installation
+* Make sure to check **Add Python to PATH** during installation
 
-### 2. Install Visual Studio Code
-- Download VS Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)  
-- Install it on your system
+## 2. Install Visual Studio Code
 
-### 3. Install PlatformIO Extension in VS Code
-- Open VS Code → go to **Extensions** → search for `PlatformIO IDE` → **Install**
+* Download VS Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+* Install it on your system
 
-### 4. Download BlynkGO_KrapraoMuKrob
-- Download the **BlynkGO_KrapraoMuKrob** ZIP file  
-- **Extract** the ZIP into any folder on your computer  
+## 3. Install PlatformIO Extension in VS Code
 
-### 5. Open the project in VS Code
-- Open VS Code → **File → Open Folder**  
-  → select the folder **BlynkGO_KrapraoMuKrob** where you extracted the project  
-- Wait for **PlatformIO** to load and set up the environment completely  
+* Open VS Code → go to **Extensions** → search for `PlatformIO IDE` → **Install**
 
-### 6. Ready to Use BlynkGO_KrapraoMuKrob
-- You can select/change the board in `platformio.ini`.
-- You can **build and upload/run** the project normally through PlatformIO,  
+## 4. Install Git
+
+* Download Git for Windows: [https://git-scm.com/install/windows](https://git-scm.com/install/windows)
+* Install Git on your system
+
+## 5. Clone BlynkGO_KrapraoMuKrob
+
+* Open a terminal (CMD/PowerShell)
+* **Navigate to the folder** where you want to clone the project, for example:
+
+```bash
+cd C:\MyProjects
+```
+
+* Run the clone command:
+
+```bash
+git clone https://github.com/BlynkGO/BlynkGO_KrapraoMuKrob
+```
+
+* Navigate into the project folder:
+
+```bash
+cd BlynkGO_KrapraoMuKrob
+```
+
+* Ignore local changes in `src/` folder to prevent accidental overwrites:
+
+```bash
+git update-index --skip-worktree src/*
+```
+
+* For future updates from the repository, use:
+
+```bash
+git pull
+```
+
+## 6. Open the project in VS Code
+
+* Open VS Code → **File → Open Folder** → select the folder **BlynkGO_KrapraoMuKrob**
+* Wait for **PlatformIO** to load and set up the environment completely
+
+## 7. Ready to Use BlynkGO_KrapraoMuKrob
+
+* You can select/change the board in `platformio.ini`.
+* Build and upload/run the project normally through PlatformIO,
   and use the generated graphics in your BeeNeXT touchscreen projects.
-    
-  (First time: the toolchain and other necessary tools will be installed automatically.)
+
+> (First time: the toolchain and other necessary tools will be installed automatically.)
+
     
 ![kmk_build](kmk_build.png)  
   
----
   
 ## 📖 How to convert Image for using in your project.
 

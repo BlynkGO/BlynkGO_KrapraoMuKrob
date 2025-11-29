@@ -54,7 +54,8 @@ git clone https://github.com/BlynkGO/BlynkGO_KrapraoMuKrob
 cd BlynkGO_KrapraoMuKrob
 ```
 
-* Ignore local changes in `src/` folder to prevent accidental overwrites:
+* To protect your project in the **src/** folder from being overwritten during future updates,  
+  run the following command to ignore local changes:
 
 ```bash
 git update-index --skip-worktree src/*

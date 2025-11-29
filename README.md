@@ -113,7 +113,7 @@ void loop(){
   BlynkGO.update();
 }
 ```
-If an existing project exists, it will be automatically renamed as `main.cpp_YYYYMMDD_HHMMSS`.
+If a `main.cpp` file already exists, it will be automatically renamed to `main.cpp_YYYYMMDD_HHMMSS`.
 
 ---  
 ## 📖 How to convert Image for using in your project.

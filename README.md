@@ -95,8 +95,6 @@ git pull
 > new_blynkgo
 ```
 
-* Follow the prompts to generate a new BlynkGO project structure
-
 ---  
 ## 📖 How to convert Image for using in your project.
 

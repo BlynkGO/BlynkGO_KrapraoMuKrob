@@ -99,6 +99,22 @@ git pull
 > new_blynkgo
 ```
 
+* In the `src` folder, a new `main.cpp` file will be automatically created with the following code:
+
+```c
+#include <BlynkGOv5.h>
+
+void setup(){
+  Serial.begin(9600); Serial.println();
+  BlynkGO.begin();
+}
+
+void loop(){
+  BlynkGO.update();
+}
+```
+If an existing project exists, it will be automatically renamed as `main.cpp_YYYYMMDD_HHMMSS`.
+
 ---  
 ## 📖 How to convert Image for using in your project.
 

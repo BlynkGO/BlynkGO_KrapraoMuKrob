@@ -3,9 +3,17 @@ import json
 import subprocess
 import time
 from os.path import join, expanduser
-from SCons.Script import Import
-
+from SCons.Script import Import, File
 import sys
+
+# ==========================================================
+# ฟังก์ชันป้องกัน path ที่มี space
+# ==========================================================
+def safe_path(p):
+    p = str(p)
+    return f'"{p}"' if " " in p else p
+
+
 # ==========================================================
 # ตรวจสอบ ~/.beearduino/config.json ถ้าไม่มี ให้รัน setup.py
 # ==========================================================
@@ -20,7 +28,11 @@ def run_setup():
     if os.path.isfile(setup_script):
         print(f"[INFO] Running setup: {setup_script}")
         try:
-            subprocess.run([sys.executable, setup_script], check=True)
+            subprocess.run(
+                f'{safe_path(sys.executable)} {safe_path(setup_script)}',
+                shell=True,
+                check=True
+            )
         except subprocess.CalledProcessError as e:
             print(f"[ERROR] setup.py exited with error: {e}")
         except Exception as e:
@@ -53,7 +65,7 @@ else:
 Import("env")
 
 # ==========================================================
-# ตรวจสอบและ kill + ลบ program.exe ถ้ามีอยู่ใน .pio/build/<env>
+# kill + ลบ program.exe ถ้ามีอยู่ใน .pio/build/<env>
 # ==========================================================
 try:
     project_dir = env["PROJECT_DIR"]
@@ -63,16 +75,18 @@ try:
     if os.path.isfile(exe_path):
         print(f"[INFO] Found existing {exe_path}, attempting to kill and remove...")
 
-        # พยายาม kill process
         try:
-            subprocess.run(["taskkill", "/F", "/IM", "program.exe"],
-                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(
+                'taskkill /F /IM program.exe',
+                shell=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
             print("[INFO] Sent kill signal to program.exe")
         except Exception as e:
             print(f"[WARNING] Could not send kill signal to program.exe: {e}")
 
-        # รอจนไฟล์สามารถลบได้ หรือ timeout 5 วินาที
-        max_wait = 5  # วินาที
+        max_wait = 5
         waited = 0
         while os.path.isfile(exe_path) and waited < max_wait:
             try:
@@ -94,26 +108,28 @@ except Exception as e:
     print(f"[ERROR] Failed checking for program.exe: {e}")
 
 # ==========================================================
-# ตั้งค่า USER_DIR และ toolchain
+# USER_DIR และ toolchain
 # ==========================================================
-user_path = expanduser("~")  # path ไปยัง home ของ user
-env["USER_DIR"] = user_path  # ให้ PlatformIO ใช้ $USER_DIR ได้ใน build_flags
+user_path = expanduser("~")
+env["USER_DIR"] = user_path
 
 toolchain_root = join(user_path, ".beearduino", "toolchain")
-toolchain_path = join(toolchain_root, "bin")
+toolchain_bin = join(toolchain_root, "bin")
 
+# path-safe toolchain commands
 env.Replace(
-    CC=join(toolchain_path, "gcc.exe"),
-    CXX=join(toolchain_path, "g++.exe"),
-    LINK=join(toolchain_path, "g++.exe"),
-    AR=join(toolchain_path, "ar.exe"),
-    RANLIB=join(toolchain_path, "ranlib.exe"),
+    CC=safe_path(join(toolchain_bin, "gcc.exe")),
+    CXX=safe_path(join(toolchain_bin, "g++.exe")),
+    LINK=safe_path(join(toolchain_bin, "g++.exe")),
+    AR=safe_path(join(toolchain_bin, "ar.exe")),
+    RANLIB=safe_path(join(toolchain_bin, "ranlib.exe")),
 )
 
-env["ENV"]["PATH"] = toolchain_path + os.pathsep + env["ENV"].get("PATH", "")
+# PATH
+env.PrependENVPath("PATH", toolchain_bin)
 
 # ==========================================================
-# เพิ่ม include / lib paths ของ toolchain
+# include / lib paths
 # ==========================================================
 env.Append(
     CPPPATH=[
@@ -124,7 +140,7 @@ env.Append(
 )
 
 # ==========================================================
-# โหลด build_flags มาตรฐาน (std_build_flags.json)
+# โหลด std_build_flags.json
 # ==========================================================
 std_flags_file = join(env['PROJECT_DIR'], "std_build_flags.json")
 std_flags = []
@@ -137,7 +153,9 @@ except Exception as e:
 # ==========================================================
 # โหลด build_flags จาก board JSON
 # ==========================================================
-board_name = env.GetProjectConfig().get("env:" + env["PIOENV"], "board_name", None)
+project_config = env.GetProjectConfig()
+board_name = project_config.get("env:" + env["PIOENV"], "board_name", None)
+
 board_flags = []
 if board_name:
     board_file = join(env['PROJECT_DIR'], "platform", "boards", f"{board_name}.json")
@@ -150,9 +168,8 @@ else:
     print("[INFO] No board_name specified, skipping board flags")
 
 # ==========================================================
-# อ่านค่าที่ platformio.ini กำหนดไว้ (รองรับทั้ง string และ list)
+# อ่าน build_flags จาก platformio.ini
 # ==========================================================
-project_config = env.GetProjectConfig()
 ini_flags_raw = project_config.get("env:" + env["PIOENV"], "build_flags", "")
 
 if isinstance(ini_flags_raw, str):
@@ -171,7 +188,7 @@ for line in ini_lines:
         ini_defines[key] = val
 
 # ==========================================================
-# รวม flags และป้องกันการ override เฉพาะ LCD_WIDTH/HEIGHT
+# ป้องกันการ override LCD_WIDTH / LCD_HEIGHT
 # ==========================================================
 protected_keys = {"LCD_WIDTH", "LCD_HEIGHT"}
 all_flags = (std_flags or []) + (board_flags or [])
@@ -182,7 +199,7 @@ def remove_protected_flags(flags, protected, ini_def_map):
         if isinstance(flag, str) and flag.startswith("-D"):
             name = flag[2:].split("=", 1)[0].strip()
             if name in protected and name in ini_def_map:
-                print(f"[INFO] Skip {name} from JSON/std (using platformio.ini value: {ini_def_map[name]})")
+                print(f"[INFO] Skip {name} from JSON/std (platformio.ini has priority)")
                 continue
         out.append(flag)
     return out
@@ -191,7 +208,7 @@ filtered_std_flags = remove_protected_flags(std_flags, protected_keys, ini_defin
 filtered_board_flags = remove_protected_flags(board_flags, protected_keys, ini_defines)
 
 # ==========================================================
-# รวมและ append เข้า environment
+# รวม flags
 # ==========================================================
 merged_flags = filtered_std_flags + filtered_board_flags
 if merged_flags:
@@ -199,7 +216,7 @@ if merged_flags:
     print(f"[INFO] Appended BUILD_FLAGS ({board_name}): {len(merged_flags)} flags")
 
 # ==========================================================
-# แสดงค่าที่ใช้จริง (LCD_WIDTH / LCD_HEIGHT)
+# แสดงค่าที่ใช้จริง
 # ==========================================================
 def get_final_define(name):
     if name in ini_defines:

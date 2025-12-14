@@ -63,7 +63,7 @@ typedef std::vector<int32_t> v_grid_dsc;
 
 
 typedef void (*event_cb_t)      (GWidget* widget, event_t event);
-typedef void (*event_handler_t) (GWidget* parent);
+typedef void (*event_handler_t) (GWidget* widget);
 void main_event_cb(lv_event_t * event);
 
 #if LV_USE_SDL
@@ -934,6 +934,7 @@ class GObject  {
     inline void gap(int32_t value, style_selector_t selector=GPART_MAIN)                          { this->pad_row(value,selector); this->pad_column(value,selector); }
     inline void row_gap(int32_t value, style_selector_t selector=GPART_MAIN)                      { this->pad_row(value,selector);    }
     inline void column_gap(int32_t value, style_selector_t selector=GPART_MAIN)                   { this->pad_column(value,selector); }  
+
 
     inline void padding_top(int32_t value, style_selector_t selector=GPART_MAIN)                  { this->pad_top(value,selector);    }
     inline void padding_bottom(int32_t value, style_selector_t selector=GPART_MAIN)               { this->pad_bottom(value,selector); }

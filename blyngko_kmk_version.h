@@ -1,5 +1,7 @@
 #pragma once
 
+#define BLYNKGO_KRAPRAOMUKROB
+
 /** Major version number (X.x.x) */
 #define BLYNKGO_KMK_VERSION_MAJOR   0
 /** Minor version number (x.X.x) */

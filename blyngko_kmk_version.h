@@ -7,4 +7,4 @@
 /** Minor version number (x.X.x) */
 #define BLYNKGO_KMK_VERSION_MINOR   9
 /** Patch version number (x.x.X) */
-#define BLYNKGO_KMK_VERSION_PATCH   4
+#define BLYNKGO_KMK_VERSION_PATCH   5

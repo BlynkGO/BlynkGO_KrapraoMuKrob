@@ -60,6 +60,18 @@ class GImage : public GObject {
     inline void setImage(const img_t *src_img)          { this->src((const void*) src_img);               }
     inline void setImage(const img_t & src_img)         { this->setImage(&src_img);                       }
     inline void setSymbol(const void* symbol)           { this->src( symbol);                             }
+    inline void setImage(String file_path)  {
+      #if defined(_WIN32) || defined(WIN32)
+        if(file_path.endsWith("png") || file_path.endsWith("PNG") ||
+           file_path.endsWith("jpg") || file_path.endsWith("JPG") || file_path.endsWith("jpeg") || file_path.endsWith("JPEG") ||
+           file_path.endsWith("bmp") || file_path.endsWith("BMP") ) {
+          if(file_path.startsWith("A:") == false ) {
+            file_path = "A:" + file_path;
+          }
+        }
+      #endif
+      this->src( (const void*) file_path.c_str() );
+    }
 
     /**
      * Set an offset for the source of an image so the image will be displayed from the new origin.
@@ -251,6 +263,7 @@ class GImage : public GObject {
     GImage& operator =(const img_t & src_img);
     GImage& operator =(const void * symbol);
     GImage& operator =(draw_buf_t * grap);
+    inline GImage& operator =(const char* src_img)       { this->setImage(src_img); return *this;  }
 
     inline bool operator ==(const img_t * src_img) {
       if(!this->isCreated()) this->create();

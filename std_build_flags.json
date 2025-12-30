@@ -64,6 +64,11 @@
     "-D LV_USE_DRAW_SW_COMPLEX_GRADIENTS=1",
     "-D LV_USE_GRID=1",
     "-D LV_USE_FLEX=1",
+    "-D LV_USE_BMP=1",
+    "-D LV_USE_TJPGD=1",
+    "-D LV_USE_LODEPNG=1",
+    "-D LV_USE_FS_WIN32=1",
+    "-D LV_FS_WIN32_LETTER=65",
 
     "-D PRASANMIT_20=1",
     "-D PRASANMIT_25=1",

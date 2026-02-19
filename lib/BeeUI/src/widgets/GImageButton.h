@@ -106,8 +106,13 @@ class GImageButton : public GObject {
                   const img_t &src_btn_pressed,
                   GWidget& parent=GScreen) : GObject(&parent)
     {
+      this->_btn_type           = BUTTON_PUSH;
       this->_img_btn_released   = &src_btn_released;
       this->_img_btn_pressed    = &src_btn_pressed;
+      this->_img_btn_inactive   = NULL;
+      this->_img_toggle_inactive = NULL;
+      this->_img_toggle_released = NULL;
+      this->_img_toggle_pressed  = NULL;
     }
 
     GImageButton( button_type_t button_type, 
@@ -116,6 +121,11 @@ class GImageButton : public GObject {
     {
       this->_btn_type        = button_type;
       this->_img_btn_released   = &src_btn_released;
+      this->_img_btn_pressed    = NULL;
+      this->_img_btn_inactive   = NULL;
+      this->_img_toggle_inactive = NULL;
+      this->_img_toggle_released = NULL;
+      this->_img_toggle_pressed  = NULL;
     }
 
     virtual ~GImageButton();

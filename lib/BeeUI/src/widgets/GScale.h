@@ -95,6 +95,7 @@ class GScale : public GObject {
     inline  void  angle_offset(int32_t angle)               { this->rotation(angle);                  }
     inline  void  angle_offset(GArc &arc)                   { this->angle_offset(arc.angle_offset()); }
     inline  int32_t angle_offset()                          { return this->rotation();                }
+    inline  void  pad_radial(int32_t v, gpart_t part=GPART_INDICATOR) { GObject::pad_radial(v, part); }
 
     GScaleSection* addSection();
     void           clearSection();

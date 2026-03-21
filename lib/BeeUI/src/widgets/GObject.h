@@ -705,6 +705,7 @@ class GObject  {
     inline int32_t  pad_right(gpart_t part=GPART_MAIN)                                    { return (int32_t) (style_prop(part, GSTYLE_PAD_RIGHT).num);              }
     inline int32_t  pad_row(gpart_t part=GPART_MAIN)                                      { return (int32_t) (style_prop(part, GSTYLE_PAD_ROW).num);                }
     inline int32_t  pad_column(gpart_t part=GPART_MAIN)                                   { return (int32_t) (style_prop(part, GSTYLE_PAD_COLUMN).num);             }
+    inline int32_t  pad_radial(gpart_t part=GPART_MAIN)                                   { return (int32_t) (style_prop(part, GSTYLE_PAD_RADIAL).num);             }
 
     inline int32_t  pad(gpart_t part=GPART_MAIN)                                          { return min(min(min(this->pad_top(part) , this->pad_bottom(part)),this->pad_left(part)), this->pad_right(part));  }
     inline int32_t  pad_inner(gpart_t part=GPART_MAIN)                                    { return min(this->pad_row(part) , this->pad_column(part));               }
@@ -816,6 +817,7 @@ class GObject  {
     inline text_align_t text_align(gpart_t part=GPART_MAIN)                               { return (text_align_t) (style_prop(part, GSTYLE_TEXT_ALIGN).num);        }
 
     inline int32_t  radius(gpart_t part=GPART_MAIN)                                       { return (int32_t) (style_prop(part, GSTYLE_RADIUS).num);                 }
+    inline int32_t  radial_offset(gpart_t part=GPART_MAIN)                                { return (int32_t) (style_prop(part, GSTYLE_RADIAL_OFFSET).num);          }
     inline bool     clip_corner(gpart_t part=GPART_MAIN)                                  { return (bool)  (style_prop(part, GSTYLE_CLIP_CORNER).num);              }
 
     inline int32_t  corner_radius(gpart_t part=GPART_MAIN)                                { return this->radius(part);      }
@@ -929,6 +931,7 @@ class GObject  {
     void pad_right(int32_t value, style_selector_t selector=GPART_MAIN);
     void pad_row(int32_t value, style_selector_t selector=GPART_MAIN);
     void pad_column(int32_t value, style_selector_t selector=GPART_MAIN);
+    void pad_radial(int32_t value, style_selector_t selector=GPART_MAIN);
     inline void pad_inner(int32_t value, style_selector_t selector=GPART_MAIN)                    { this->pad_row(value,selector); this->pad_column(value,selector); }
     inline void grid_gap(int32_t value, style_selector_t selector=GPART_MAIN)                     { this->pad_row(value,selector); this->pad_column(value,selector); }  
     inline void gap(int32_t value, style_selector_t selector=GPART_MAIN)                          { this->pad_row(value,selector); this->pad_column(value,selector); }
@@ -1083,6 +1086,7 @@ class GObject  {
 
     void text_align(text_align_t value, style_selector_t selector=GPART_MAIN);
     void radius(int32_t value, style_selector_t selector=GPART_MAIN);
+    void radial_offset(int32_t value, style_selector_t selector=GPART_MAIN);
     void clip_corner(bool value, style_selector_t selector=GPART_MAIN);
 
     inline void corner_radius(int32_t value, style_selector_t selector=GPART_MAIN)              { this->radius(value, selector);        }

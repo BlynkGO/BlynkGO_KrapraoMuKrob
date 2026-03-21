@@ -1243,6 +1243,8 @@ enum  {
     GSTYLE_ALIGN                  = 10,
 
     GSTYLE_RADIUS                 = 12,
+    GSTYLE_RADIAL_OFFSET          = 13,
+    GSTYLE_PAD_RADIAL             = 14,
 
     /*Group 1*/
     GSTYLE_PAD_TOP                = 16,
@@ -1490,7 +1492,7 @@ typedef enum {
   VECTOR_GRADIENT_SPREAD_REFLECT,
 } vector_gradient_spread_t;
 
-typedef lv_gradient_stop_t  gradient_stop_t;
+typedef lv_grad_stop_t  gradient_stop_t;
 
 enum {
   /**

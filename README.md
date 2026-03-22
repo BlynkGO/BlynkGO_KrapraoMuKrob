@@ -158,7 +158,63 @@ To specify a custom output filename, add the `-o` option followed by the desired
 ```
 > imgconv logo.png -o my_logo
 ```
+---  
+## 📖 How to convert TrueType Font for using in your project.
 
-This will generate a file named `my_logo.c` in `src/images/output`.
+### 1️⃣ Prepare Your TrueType Font (.ttf)
+Place the TrueType Font (** .ttf **) files that you want to convert into the folder:
+`src/fonts`
+
+### 2️⃣ Convert Font
+Open a Terminal in the `src/fonts` folder containing the fonts to convert, then type:
+
+```bash
+> fontconv --font {FONT}.ttf --size {SIZE}
+```
+
+* **Example:**
+```bash
+> fontconv --font myfont.ttf --size 25
+```
+
+### 3️⃣ Convert Numeric & Math Symbols (Minimal Size)
+To convert only numbers and essential mathematical symbols (e.g., brackets, plus, minus, multiply, divide, exponents, etc.) to keep the file size small, add the `-num` option:
+
+```bash
+> fontconv --font {FONT}.ttf --size {SIZE} -num
+```
+
+### 4️⃣ Convert Thai Fonts (English + Thai + Numeric)
+To convert fonts that support Thai characters along with English and numbers, add the `-thai` option:
+
+```bash
+> fontconv --font {THAI_FONT}.ttf --size {SIZE} -thai
+```
+
+> [!IMPORTANT]
+> Thai Font (.ttf) must comply with the **BlynkGOv5 Font** standard.
+
+### 5️⃣ Convert Lao Fonts (English + Lao + Numeric)
+To convert fonts that support Lao characters along with English and numbers, add the `-lao` option:
+
+```bash
+> fontconv --font {LAO_FONT}.ttf --size {SIZE} -lao
+```
+
+> [!IMPORTANT]
+> Lao Font (.ttf) must comply with the **BlynkGOv5 Font** standard.
+
+### 6️⃣ Set Your Own Output Filename
+To specify a custom output filename, add the `-o` option followed by the desired name (including `.c` extension):
+
+```bash
+> fontconv --font {FONT}.ttf --size {SIZE} -o desired_name.c
+```
+
+* **Example:**
+```bash
+> fontconv --font myfont.ttf --size 25 -o myfont_xxx_25.c
+```
+
   
 

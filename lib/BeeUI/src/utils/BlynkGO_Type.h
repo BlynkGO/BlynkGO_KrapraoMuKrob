@@ -290,6 +290,14 @@ enum {
 typedef uint8_t  draw_task_type_t;
 
 enum {
+  DRAW_TASK_STATE_WAITING = LV_DRAW_TASK_STATE_WAITING,     /*Waiting for something to be finished. E.g. rendering a layer*/
+  DRAW_TASK_STATE_QUEUED = LV_DRAW_TASK_STATE_QUEUED,
+  DRAW_TASK_STATE_IN_PROGRESS = LV_DRAW_TASK_STATE_IN_PROGRESS,
+  DRAW_TASK_STATE_READY = LV_DRAW_TASK_STATE_READY,
+};
+typedef volatile int draw_task_state_t;
+
+enum {
   OBJ_TREE_WALK_NEXT,
   OBJ_TREE_WALK_SKIP_CHILDREN,
   OBJ_TREE_WALK_END,
@@ -2044,7 +2052,7 @@ typedef enum {
 #define SYMBOL_MICRO           "µ"
 #define SYMBOL_UMBRELLA        "\xef\x83\xa9"   // \uf0e9
 #define SYMBOL_WALKING         "\xef\x8b\xa9"   // \uf2e9
-#define SYMBOL_BACKSPACE       "\xef\x8b\xaa"   // \uf2ea
+// #define SYMBOL_BACKSPACE       "\xef\x8b\xaa"   // \uf2ea
 
 
 #define SYMBOL_ARROW_LEFT      "\xef\x81\xa0"   // \uf060

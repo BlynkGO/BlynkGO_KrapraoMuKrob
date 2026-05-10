@@ -905,7 +905,7 @@ class GObject  {
 
     inline void   translate(int32_t x, int32_t y , style_selector_t selector=GPART_MAIN)          { this->translate_x(x, selector); this->translate_y(y, selector);                                   }
     inline void   transform_size(int32_t w, int32_t h , style_selector_t selector=GPART_MAIN)     { this->transform_width(w, selector); this->transform_height(h, selector);                          }
-    inline void   transform_scale(int32_t scale_x, int32_t scale_y , style_selector_t selector=GPART_MAIN)  { this->transform_scale_x(scale_x, selector); this->transform_scale_x(scale_y, selector); }
+    inline void   transform_scale(int32_t scale_x, int32_t scale_y , style_selector_t selector=GPART_MAIN)  { this->transform_scale_x(scale_x, selector); this->transform_scale_y(scale_y, selector); }
     inline void   transform_pivot(int32_t pivot_x, int32_t pivot_y, style_selector_t selector=GPART_MAIN)   { this->transform_pivot_x(pivot_x, selector); this->transform_pivot_y(pivot_y, selector); }
     inline void   transform_pivot(Point pivot, style_selector_t selector=GPART_MAIN)              { this->transform_pivot(pivot.x, pivot.y, selector);                                                }
     inline void   transform_skew(int32_t skew_x, int32_t skew_y, style_selector_t selector=GPART_MAIN) { this->transform_skew_x(skew_x, selector); this->transform_skew_y(skew_y, selector);          }
@@ -1090,7 +1090,7 @@ class GObject  {
     void clip_corner(bool value, style_selector_t selector=GPART_MAIN);
 
     inline void corner_radius(int32_t value, style_selector_t selector=GPART_MAIN)              { this->radius(value, selector);        }
-    inline void corner_mask  (int32_t value, style_selector_t selector=GPART_MAIN)              { this->clip_corner(value, selector);   }
+    inline void corner_mask  (bool value, style_selector_t selector=GPART_MAIN)                 { this->clip_corner(value, selector);   }
     inline void rounded(bool enable, style_selector_t selector=GPART_MAIN)                      { this->radius((enable)? RADIUS_CIRCLE:0, selector);        }
 
     void opa(opa_t value, style_selector_t selector=GPART_MAIN);

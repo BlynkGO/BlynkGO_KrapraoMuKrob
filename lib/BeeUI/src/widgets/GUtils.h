@@ -43,6 +43,10 @@
 #define GWIDGET_CAST(T) ((T*)widget)
 #endif
 
+#ifndef GPARENT
+#define GPARENT   GWidget&parent=GScreen
+#endif
+
 #ifndef TFT_COLOR
 #define TFT_COLOR   lv_color_u16      // แปลงจาก color_u16 --> lv_color_t
 #endif

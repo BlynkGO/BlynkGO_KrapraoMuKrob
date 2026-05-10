@@ -60,12 +60,23 @@ class GImage : public GObject {
     inline void setImage(const img_t *src_img)          { this->src((const void*) src_img);               }
     inline void setImage(const img_t & src_img)         { this->setImage(&src_img);                       }
     inline void setSymbol(const void* symbol)           { this->src( symbol);                             }
-    inline void setImage(String file_path)  {
+    inline void setImage(String file_path) {
       #if defined(_WIN32) || defined(WIN32)
-        if(file_path.endsWith("png") || file_path.endsWith("PNG") ||
-           file_path.endsWith("jpg") || file_path.endsWith("JPG") || file_path.endsWith("jpeg") || file_path.endsWith("JPEG") ||
-           file_path.endsWith("bmp") || file_path.endsWith("BMP") ) {
-          if(file_path.startsWith("A:") == false ) {
+        // 1. แปลง \ เป็น / ทั้งหมด (Normalization)
+        file_path.replace("\\", "/");
+
+        // 2. ตรวจสอบนามสกุลไฟล์
+        String path_lower = file_path;
+        path_lower.toLowerCase();
+
+        if( path_lower.endsWith(".png")  || 
+            path_lower.endsWith(".jpg")  || 
+            path_lower.endsWith(".jpeg") || 
+            path_lower.endsWith(".bmp")  ||
+            path_lower.endsWith(".bin") ) 
+        {
+          // 3. ถ้ายังไม่มี A: นำหน้า ให้เติมให้เอง
+          if( file_path.startsWith("A:") == false ) {
             file_path = "A:" + file_path;
           }
         }
@@ -87,7 +98,7 @@ class GImage : public GObject {
     void offset_y(int32_t y);
 
     inline void offset(int32_t x, int32_t y)              { if(!isCreated()) create(); this->offset_x(x); this->offset_y(y);    }
-    inline void oiffet(Point p)                           { this->offset(p.x,p.y);  }
+    inline void offset(Point p)                           { this->offset(p.x,p.y);  }
 
     /**
      * Set the rotation angle of the image.

@@ -12,7 +12,7 @@
         {
           "name": "BlynkGO_KrapraoMuKrob",
           "architecture": "pc",
-          "version": "0.9.1",
+          "version": "0.9.6",
           "category": "BlynkGO PC",
           "toolsDependencies": [
             {
